@@ -10,16 +10,40 @@ PulseBall.prototype.addMatch = function(match){
   var firstTeam          = match.teams[0].name;
   var secondTeam         = match.teams[1].name;
   var outcome            = match.outcome;
-  var host               = match.venue.country
-  var firstTeamPosition  = this.rankingTablePosition(firstTeam)
-  var secondTeamPosition = this.rankingTablePosition(secondTeam)
-  var ratingDifference   = this.ratingDifference(firstTeamPosition, secondTeamPosition, host)
+  var host               = match.venue.country;
+  var firstTeamIndex     = this.getRankingTableIndex(firstTeam);
+  var secondTeamIndex    = this.getRankingTableIndex(secondTeam);
+  var ratingDifference   = Math.abs(this.ratingDifference(firstTeamIndex, secondTeamIndex, host));
 
-  console.log(ratingDifference);
+  if (ratingDifference>=10) ratingDifference = 10;
+
+  console.log(this.rankingsTable);
+    
+  this.updateRankingTable(firstTeamIndex, secondTeamIndex, outcome, ratingDifference);
 
 };
 
-PulseBall.prototype.rankingTablePosition = function(team){
+PulseBall.prototype.updateRankingTable = function(firstTeamIndex, secondTeamIndex, outcome, difference){
+  var pointsWhenWinner = parseFloat((1 - (difference/10)).toFixed(2));
+  var pointsWhenDraw   = parseFloat((difference/10).toFixed(2));
+  switch(outcome){
+    case "A":
+      this.rankingsTable[firstTeamIndex].pts  += pointsWhenWinner;
+      this.rankingsTable[secondTeamIndex].pts -= pointsWhenWinner;
+      break;
+    case "B":
+      this.rankingsTable[firstTeamIndex].pts  -= pointsWhenWinner;
+      this.rankingsTable[secondTeamIndex].pts += pointsWhenWinner;
+      break;
+    case "D":
+      this.rankingsTable[firstTeamIndex].pts  += pointsWhenDraw;
+      this.rankingsTable[secondTeamIndex].pts += pointsWhenDraw;
+      break;
+  };
+  console.log(this.rankingsTable);
+};
+
+PulseBall.prototype.getRankingTableIndex = function(team){
   for (var i = 0; i < this.rankingsTable.length; i++) {
     if(this.rankingsTable[i].team.name === team){
       return i;
