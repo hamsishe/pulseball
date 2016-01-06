@@ -18,7 +18,6 @@ PulseBall.prototype.addMatch = function(match){
   if (ratingDifference>=10) ratingDifference = 10;
     
   this.updateScores(firstTeamIndex, secondTeamIndex, outcome, ratingDifference);
-
 };
 
 PulseBall.prototype.updateScores = function(firstTeamIndex, secondTeamIndex, outcome, difference){

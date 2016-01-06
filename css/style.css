@@ -1,0 +1,53 @@
+body{
+  background: #f7f7f7;
+}
+
+h1{
+  margin-bottom: 20px;
+}
+
+img{
+  width: 220px;
+}
+
+h3{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+section{
+    width: 80%;
+    height: 200px;
+    margin: auto;
+    padding: 10px;
+}
+
+#rankings {
+    width: 50%;
+    height: 400px;
+    float: left;
+}
+
+#match-form {
+    margin-left: 55%;
+    width: 50%;
+}
+
+table#ranking-table.table.table-bordered{
+  height:331px;
+}
+
+.submit-button{
+  text-align: center;
+}
+
+@media (max-width: 568px){
+  #rankings {
+      width: 100%;
+  }
+
+  #match-form {
+      display: inline;
+      width: 50%;
+  }
+}
