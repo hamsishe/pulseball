@@ -39,6 +39,8 @@ $(function(){
     var newMatch = {"matchId": 2524, "description": "Match 2", "venue": { "id": 900, "name": "Stadium", "city": findCity(hostCountry), "country": hostCountry}, "teams": [{"id": 2, "name": firstTeam, "abbreviation": firstTeam.substring(0,3).toUpperCase() }, { "id": 1, "name": secondTeam, "abbreviation": secondTeam.substring(0,3).toUpperCase() } ], "scores": [ 19, 23 ], "status": "C", "outcome": outcome };
 
     PULSEBALL.addMatch(newMatch);
+    $('#ranking-table').html('<th>Team</th><th>Points</th>');
+    appendNewRankingTable();
 
   });
 

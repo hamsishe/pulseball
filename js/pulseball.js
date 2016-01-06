@@ -16,14 +16,12 @@ PulseBall.prototype.addMatch = function(match){
   var ratingDifference   = Math.abs(this.ratingDifference(firstTeamIndex, secondTeamIndex, host));
 
   if (ratingDifference>=10) ratingDifference = 10;
-
-  console.log(this.rankingsTable);
     
-  this.updateRankingTable(firstTeamIndex, secondTeamIndex, outcome, ratingDifference);
+  this.updateScores(firstTeamIndex, secondTeamIndex, outcome, ratingDifference);
 
 };
 
-PulseBall.prototype.updateRankingTable = function(firstTeamIndex, secondTeamIndex, outcome, difference){
+PulseBall.prototype.updateScores = function(firstTeamIndex, secondTeamIndex, outcome, difference){
   var pointsWhenWinner = parseFloat((1 - (difference/10)).toFixed(2));
   var pointsWhenDraw   = parseFloat((difference/10).toFixed(2));
   switch(outcome){
@@ -40,7 +38,14 @@ PulseBall.prototype.updateRankingTable = function(firstTeamIndex, secondTeamInde
       this.rankingsTable[secondTeamIndex].pts += pointsWhenDraw;
       break;
   };
-  console.log(this.rankingsTable);
+
+  this.sortRankingTable();
+};
+
+PulseBall.prototype.sortRankingTable = function(){
+  this.rankingsTable.sort(function(a, b){
+      return parseFloat(a.pts).toFixed(2) - parseFloat(b.pts).toFixed(2);
+  }).reverse();
 };
 
 PulseBall.prototype.getRankingTableIndex = function(team){
@@ -53,10 +58,10 @@ PulseBall.prototype.getRankingTableIndex = function(team){
 
 PulseBall.prototype.ratingDifference = function(firstTeam, secondTeam, host){
   if(this.rankingsTable[firstTeam].team.name === host){
-    return parseFloat(((this.rankingsTable[firstTeam].pts+3) - this.rankingsTable[secondTeam].pts).toFixed(2))
+    return parseFloat(((this.rankingsTable[firstTeam].pts+3) - this.rankingsTable[secondTeam].pts).toFixed(2));
   }else if(this.rankingsTable[firstTeam].team.name === host){
-    return parseFloat(((this.rankingsTable[firstTeam].pts) - this.rankingsTable[secondTeam].pts+3).toFixed(2))
+    return parseFloat(((this.rankingsTable[firstTeam].pts) - this.rankingsTable[secondTeam].pts+3).toFixed(2));
   }else{
-    return parseFloat(((this.rankingsTable[firstTeam].pts) - this.rankingsTable[secondTeam].pts).toFixed(2))
-  }
+    return parseFloat(((this.rankingsTable[firstTeam].pts) - this.rankingsTable[secondTeam].pts).toFixed(2));
+  };
 };
