@@ -16,7 +16,7 @@ open index.html
 #### How it works
 Once on the page you can the the current rankings of five national teams and their points.
 
-If on desktop the form to add a new match will be on your right as shown on the screenshot above - you may scroll down if on a mobile devise. You will need to choose the teams currently on the ranking tables. 
+If on desktop the form to add a new match will be on your right as shown on the screenshot above - you may need to scroll down if on a mobile devise. You will need to choose the teams currently on the ranking tables. 
 
 ![alt text](./images/pulseballform.png "Pulseball Desktop")
 
